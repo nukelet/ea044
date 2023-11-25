@@ -183,7 +183,7 @@ def parse_problem(contents: str) -> tuple[list[float], list[list[float]], list[f
     # parse the "b" vector
     b = [float(x) for x in lines.pop(0).split(" ")]
     assert len(b) == constr_count
-    print("b = {b}")
+    print(f"b = {b}")
 
     return c, A, b
 
@@ -199,8 +199,7 @@ def main():
     parser = ArgumentParser(
         description = "Solve an integer linear programming problem."
     )
-    parser.add_argument('-f', '--file', help="provide an input file")
-    parser.add_argument('-i', '--interactive', help="manually input values for the integer programming problem")
+    parser.add_argument('file', help="path to file with the problem data")
     parser.add_argument('-c', '--check-solution', action="store_true", help="check solution against from the output of the HiGHS solver")
 
     args = parser.parse_args()
@@ -211,19 +210,6 @@ def main():
 
     if args.file:
         c, A, b = parse_problem_from_file(args.file)
-
-    # '''
-    # max f(x1, x2) = 5*x1 + 8*x2
-    # s.t.:
-    #     x1 + x2 <= 6
-    #     5*x1 + 9*x2 <= 45
-    #     x, y >= 0
-    #     x, y integers
-    # '''
-    # c = [-5.0, -8.0]
-    # A_ub = [[1.0, 1.0],
-    #         [5.0, 9.0]]
-    # b_ub = [6.0, 45.0]
 
     if not c or not A or not b:
         print("Error: problem input was not provided!")
