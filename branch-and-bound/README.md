@@ -5,7 +5,9 @@ This is an implementation of the branch and bound algorithm, for the class EA044
 It solves integer linear programming problems in the following form:
 
 $$ \text{minimize } \mathbf{c}^T \mathbf{x} $$
+
 $$ \text{subject to: } \mathbf{Ax} \leq \mathbf{b} $$
+
 $$ \mathbf{x} \geq 0, \text{  } \mathbf{x} \in \mathbf{Z}^n $$
 
 It uses an input file in the following form:
@@ -25,20 +27,28 @@ b_1 b_2 ... bn              # coefficients of vector "b"
 So, for example, the following 3 variables/3 constraints problem (`tests/test_3.txt`)
 
 $$ \text{minimize } -3 x_1 + -21 x_2 + -26 x_3 $$
+
 $$ \text{subject to:} $$
+
 $$ x_1 - x_2 + x_3 \leq 9 $$
+
 $$ 6 x_2 + 5 x_3 \leq 10 $$
+
 $$ 3 x_1 - 4 x_3 \leq 3 $$
 
 is represented by the following data:
 
 $$ n=3 $$
+
 $$ p=3 $$
+
 $$ \mathbf{c} = (-3, -21, -26) $$
+
 $$ \mathbf{A} = \begin{bmatrix} 1 & -1 & 1 \\\ 0 & 6 & 5 \\\ 3 & 0 & -4 \end{bmatrix} $$
+
 $$ \mathbf{b} = (9, 10, 3) $$
 
-which are then translated to the following input file (**note**: the blank lines are necessary!):
+which is then translated to the following input file (**note**: the blank lines are necessary!):
 
 ```
 3 3
@@ -73,7 +83,7 @@ $ python bnb.py [file]
 where `file` is the path to the file with the program data as described above.
 The program will show a step-by-step description of the branch-and-bound decision tree it is traversing in order to solve the problem.
 
-Additionally, unning the program with the `--check-solution` flag:
+Additionally, running the program with the `--check-solution` flag:
 
 ```sh
 $ python bnb.py [file] --check-solution
